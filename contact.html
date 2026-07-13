@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>연락처 | I AM — 이승섭</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F3EDE2;
+    --bg-card: #ECE3D2;
+    --ink: #37291D;
+    --ink-soft: #6C5945;
+    --ink-faint: #9C8C74;
+    --line: rgba(55, 41, 29, 0.10);
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2 { font-family: 'Gowun Batang', serif; font-weight: 700; }
+
+  nav {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover {
+    color: var(--ink);
+  }
+
+  nav a.active {
+    color: var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 4px;
+  }
+
+  nav .logo {
+    color: var(--ink);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  h1 {
+    font-size: 42px;
+    margin: 0 0 16px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 17.5px;
+    color: var(--ink-soft);
+    text-align: center;
+    margin: 0 0 60px;
+  }
+
+  .contact-grid {
+    display: grid;
+    gap: 32px;
+  }
+
+  .contact-item {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    padding: 28px;
+    border-radius: 8px;
+  }
+
+  .contact-item h3 {
+    font-size: 18px;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+
+  .contact-item p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  .contact-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: var(--ink);
+    color: var(--bg);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.2s ease;
+  }
+
+  .contact-link:hover {
+    background: var(--ink-soft);
+  }
+
+  .contact-code {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+
+  .form-section {
+    margin-top: 60px;
+  }
+
+  .form-section h2 {
+    font-size: 24px;
+    margin: 0 0 24px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Pretendard', sans-serif;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: white;
+    color: var(--ink);
+    font-size: 14px;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--ink);
+    box-shadow: 0 0 0 2px rgba(55, 41, 29, 0.1);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .submit-btn {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 12px 32px;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: 100%;
+  }
+
+  .submit-btn:hover {
+    background: var(--ink-soft);
+  }
+
+  footer {
+    padding: 28px 24px 46px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 560px) {
+    .container { padding: 40px 20px; }
+    h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div style="max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;">
+    <a href="index.html" class="logo">I AM</a>
+    <ul style="display: flex; list-style: none; gap: 32px; margin: 0; padding: 0;">
+      <li><a href="index.html">홈</a></li>
+      <li><a href="intro.html">소개</a></li>
+      <li><a href="contact.html" class="active">연락처</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>연락처</h1>
+  <p class="subtitle">저와 소통하고 싶으신 가요? 언제든지 연락해주세요.</p>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <h3>📧 이메일</h3>
+      <p>가장 빠른 연락 방법입니다.</p>
+      <div class="contact-code">ssafy@example.com</div>
+    </div>
+
+    <div class="contact-item">
+      <h3>📱 전화</h3>
+      <p>긴급한 일이 있으시면 전화 주세요.</p>
+      <div class="contact-code">010-1234-5678</div>
+    </div>
+
+    <div class="contact-item">
+      <h3>💼 소셜 미디어</h3>
+      <p>다양한 플랫폼에서 만날 수 있습니다.</p>
+      <div style="margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#" class="contact-link">GitHub</a>
+        <a href="#" class="contact-link">LinkedIn</a>
+        <a href="#" class="contact-link">Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>메시지 보내기</h2>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">이메일</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">제목</label>
+        <input type="text" id="subject" name="subject" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">메시지</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">메시지 보내기</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  I AM — 이승섭
+</footer>
+
+<script>
+  function handleSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    alert(`${name}님, 메시지를 받았습니다! 감사합니다.`);
+    event.target.reset();
+  }
+</script>
+
+</body>
+</html>
