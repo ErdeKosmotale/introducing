@@ -40,20 +40,38 @@
 
 <body class="bg-bg text-ink font-sans antialiased leading-relaxed">
 
-  <!-- ===== 네비게이션 바 (모든 페이지 공통) ===== -->
+  <!-- ===== 네비게이션 바 (모든 페이지에 동일하게 삽입) ===== -->
   <nav class="sticky top-0 z-40 bg-bg/85 backdrop-blur border-b border-line">
     <div class="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
       <a href="index.html" class="font-serif font-bold text-lg tracking-tight">이승섭</a>
       <div class="flex items-center gap-6 text-sm">
-        <a href="index.html" class="relative py-1 text-ink-soft hover:text-ink transition-colors">홈</a>
-        <a href="about.html" class="relative py-1 text-ink-soft hover:text-ink transition-colors">소개</a>
-        <a href="bookshelf.html" aria-current="page" class="relative py-1 text-ink">
-          책장
-          <span class="absolute left-0 -bottom-0.5 h-[2px] w-full bg-book"></span>
-        </a>
+        <a href="index.html"     data-nav class="relative py-1 text-ink-soft hover:text-ink transition-colors">홈</a>
+        <a href="about.html"     data-nav class="relative py-1 text-ink-soft hover:text-ink transition-colors">소개</a>
+        <a href="bookshelf.html" data-nav class="relative py-1 text-ink-soft hover:text-ink transition-colors">책장</a>
       </div>
     </div>
   </nav>
+  <script>
+    // 현재 열려 있는 페이지에 맞춰 네비게이션 밑줄을 자동으로 표시합니다.
+    (function () {
+      const current = location.pathname.split('/').pop() || 'index.html';
+      const underline = {
+        'index.html': 'bg-ink',
+        'about.html': 'bg-gradient-to-r from-book via-music to-body',
+        'bookshelf.html': 'bg-book',
+      };
+      document.querySelectorAll('a[data-nav]').forEach(function (link) {
+        if (link.getAttribute('href') === current) {
+          link.classList.remove('text-ink-soft', 'hover:text-ink');
+          link.classList.add('text-ink');
+          link.setAttribute('aria-current', 'page');
+          const bar = document.createElement('span');
+          bar.className = 'absolute left-0 -bottom-0.5 h-[2px] w-full ' + (underline[current] || 'bg-ink');
+          link.appendChild(bar);
+        }
+      });
+    })();
+  </script>
 
   <!-- ===== 헤더 ===== -->
   <header class="px-6 pt-20 pb-6 max-w-3xl mx-auto text-center">
@@ -217,7 +235,7 @@
       detailBody.classList.remove('hidden');
       document.getElementById('dTitle').textContent = book.title;
       document.getElementById('dAuthor').textContent = book.author ? book.author : '저자 미상';
-      document.getElementById('dNote').textContent = book.note ? '"' + book.note + '"' : '추천평이 남겨지지 않았어요.';
+      document.getElementById('dNote').textContent = book.note ? '“' + book.note + '”' : '추천평이 남겨지지 않았어요.';
       document.getElementById('dBy').textContent = book.recommender + '님의 추천';
     }
 
