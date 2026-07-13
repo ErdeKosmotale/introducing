@@ -3,212 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>홈 | I AM — 이승섭</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<title>I AM — 이승섭</title>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #F3EDE2;
-    --bg-card: #ECE3D2;
-    --ink: #37291D;
-    --ink-soft: #6C5945;
-    --ink-faint: #9C8C74;
-    --line: rgba(55, 41, 29, 0.10);
-  }
 
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Pretendard', -apple-system, sans-serif;
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, blockquote { font-family: 'Gowun Batang', serif; font-weight: 700; }
-
-  nav {
-    background: var(--bg-card);
-    border-bottom: 1px solid var(--line);
-  }
-
-  nav a {
-    text-decoration: none;
-    color: var(--ink-soft);
-    transition: color 0.2s ease;
-  }
-
-  nav a:hover {
-    color: var(--ink);
-  }
-
-  nav a.active {
-    color: var(--ink);
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: 4px;
-  }
-
-  nav .logo {
-    color: var(--ink);
-    font-size: 20px;
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .hero {
-    padding: 110px 24px 60px;
-    text-align: center;
-  }
-
-  .hero h1 {
-    font-size: clamp(42px, 7vw, 62px);
-    margin: 0 0 26px;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-  }
-
-  .hero p {
-    font-size: 17.5px;
-    color: var(--ink-soft);
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    margin-top: 40px;
-    flex-wrap: wrap;
-  }
-
-  .cta-btn {
-    padding: 12px 32px;
-    font-family: 'Pretendard', sans-serif;
-    font-size: 15px;
-    text-decoration: none;
-    border-radius: 999px;
-    transition: all 0.2s ease;
-    border: 1px solid;
-  }
-
-  .cta-btn.primary {
-    background: var(--ink);
-    color: var(--bg);
-    border-color: var(--ink);
-  }
-
-  .cta-btn.primary:hover {
-    background: var(--ink-soft);
-    border-color: var(--ink-soft);
-  }
-
-  .cta-btn.secondary {
-    background: transparent;
-    color: var(--ink);
-    border-color: var(--ink);
-  }
-
-  .cta-btn.secondary:hover {
-    background: var(--ink);
-    color: var(--bg);
-  }
-
-  .features {
-    padding: 60px 24px;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .features h2 {
-    font-size: 28px;
-    margin: 0 0 40px;
-    text-align: center;
-  }
-
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
-  }
-
-  .feature-card {
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    padding: 28px;
-    border-radius: 8px;
-  }
-
-  .feature-card h3 {
-    font-size: 18px;
-    margin: 0 0 12px;
-  }
-
-  .feature-card p {
-    font-size: 14px;
-    margin: 0;
-    color: var(--ink-soft);
-  }
-
-  footer {
-    padding: 28px 24px 46px;
-    text-align: center;
-    font-size: 13px;
-    color: var(--ink-faint);
-    border-top: 1px solid var(--line);
-  }
-
-  @media (max-width: 560px) {
-    .hero { padding: 80px 20px 40px; }
-    .cta-buttons { flex-direction: column; align-items: center; }
-    .cta-btn { width: 100%; max-width: 280px; }
-  }
-</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#F3EDE2', card: '#ECE3D2',
+          ink: '#37291D', 'ink-soft': '#6C5945', 'ink-faint': '#9C8C74',
+          line: 'rgba(55,41,29,0.10)',
+          book: '#4A6B4F', music: '#B08328', body: '#B65A38', shelf: '#8A6B4A',
+        },
+        fontFamily: {
+          serif: ['"Gowun Batang"', 'serif'],
+          sans: ['Pretendard', '-apple-system', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
 </head>
-<body>
 
-<nav>
-  <div style="max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center;">
-    <a href="index.html" class="logo">I AM</a>
-    <ul style="display: flex; list-style: none; gap: 32px; margin: 0; padding: 0;">
-      <li><a href="index.html" class="active">홈</a></li>
-      <li><a href="intro.html">소개</a></li>
-      <li><a href="contact.html">연락처</a></li>
-    </ul>
-  </div>
-</nav>
+<body class="bg-bg text-ink font-sans antialiased leading-relaxed">
 
-<section class="hero">
-  <h1>이승섭</h1>
-  <p>여러 갈래의 경험을 두루 겪고, 하나로 엮어가고 싶은 사람입니다.</p>
-  <div class="cta-buttons">
-    <a href="intro.html" class="cta-btn primary">자세히 알아보기</a>
-    <a href="contact.html" class="cta-btn secondary">연락하기</a>
-  </div>
-</section>
-
-<section class="features">
-  <h2>저는 이런 사람입니다</h2>
-  <div class="feature-grid">
-    <div class="feature-card">
-      <h3>📚 독서</h3>
-      <p>책을 통해 다양한 관점을 배웁니다. 좋은 도서가 있으면 꼭 추천해주세요.</p>
+  <!-- ===== 네비게이션 바 (모든 페이지 공통) ===== -->
+  <nav class="sticky top-0 z-40 bg-bg/85 backdrop-blur border-b border-line">
+    <div class="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="font-serif font-bold text-lg tracking-tight">이승섭</a>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="index.html" aria-current="page" class="relative py-1 text-ink">
+          홈
+          <span class="absolute left-0 -bottom-0.5 h-[2px] w-full bg-ink"></span>
+        </a>
+        <a href="about.html" class="relative py-1 text-ink-soft hover:text-ink transition-colors">소개</a>
+        <a href="bookshelf.html" class="relative py-1 text-ink-soft hover:text-ink transition-colors">책장</a>
+      </div>
     </div>
-    <div class="feature-card">
-      <h3>🎹 음악</h3>
-      <p>피아노를 좋아합니다. 같은 곡도 연주자에 따라 다르게 들리는 그 느낌을 좋아합니다.</p>
-    </div>
-    <div class="feature-card">
-      <h3>🏃 운동</h3>
-      <p>달리기와 축구, 헬스 등 다양한 운동을 즐깁니다. 건강한 생활을 추구합니다.</p>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<footer>
-  I AM — 이승섭
-</footer>
+  <!-- ===== HERO ===== -->
+  <section class="px-6 pt-24 pb-8 text-center">
+    <p class="text-[13px] tracking-[0.3em] text-ink-faint uppercase mb-6">I AM</p>
+    <h1 class="font-serif font-bold text-[clamp(42px,7vw,62px)] leading-tight tracking-tight mb-7">이승섭</h1>
+    <p class="text-[17.5px] text-ink-soft max-w-[460px] mx-auto">
+      여러 갈래의 경험을 두루 겪고, 하나로 엮어가고 싶은 사람입니다.
+    </p>
+
+    <svg class="block w-[min(680px,92%)] mx-auto mt-7" viewBox="0 0 680 120"
+         preserveAspectRatio="xMidYMid meet" role="img" aria-label="세 갈래의 실이 하나로 엮이는 그림">
+      <path d="M 40 30 C 180 30, 240 60, 340 60 S 520 90, 640 60" fill="none" stroke="#4A6B4F" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+      <path d="M 40 60 C 180 60, 240 30, 340 60 S 520 30, 640 60" fill="none" stroke="#B08328" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+      <path d="M 40 90 C 180 90, 240 90, 340 60 S 520 60, 640 60" fill="none" stroke="#B65A38" stroke-width="2.5" stroke-linecap="round" opacity="0.75"/>
+      <circle cx="40" cy="30" r="4" fill="#4A6B4F"/>
+      <circle cx="40" cy="60" r="4" fill="#B08328"/>
+      <circle cx="40" cy="90" r="4" fill="#B65A38"/>
+      <circle cx="640" cy="60" r="5" fill="#37291D"/>
+    </svg>
+  </section>
+
+  <!-- ===== 소개로 가는 안내 ===== -->
+  <section class="px-6 max-w-3xl mx-auto text-center py-6">
+    <p class="text-ink-soft text-[15.5px]">
+      책과 음악, 그리고 달리기까지 —
+      <a href="about.html" class="text-book underline underline-offset-4 decoration-book/40 hover:decoration-book transition-colors">저를 이루는 세 갈래</a>를 소개할게요.
+    </p>
+  </section>
+
+  <!-- ===== GOAL (닫는 문장) ===== -->
+  <section class="px-6 pt-24 pb-28 text-center">
+    <div class="max-w-[560px] mx-auto">
+      <svg class="block w-[200px] mx-auto mb-8" viewBox="0 0 200 24" aria-hidden="true">
+        <path d="M 10 6 C 60 6, 90 12, 190 12" fill="none" stroke="#4A6B4F" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+        <path d="M 10 12 C 60 12, 90 12, 190 12" fill="none" stroke="#B08328" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+        <path d="M 10 18 C 60 18, 90 12, 190 12" fill="none" stroke="#B65A38" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+      </svg>
+      <p class="text-[13px] tracking-[0.26em] text-ink-faint uppercase mb-7">Goal</p>
+      <blockquote class="font-serif font-bold text-[clamp(20px,3.4vw,26px)] leading-[1.7] m-0">
+        다양한 일들을 많이 해보고 싶습니다.<br>
+        그리고 개발을 공부할수록, 여러 경험들을<br>
+        잘 엮어나갈 수 있다고 믿습니다.
+      </blockquote>
+      <p class="mt-8 text-sm text-ink-faint">이승섭</p>
+    </div>
+  </section>
+
+  <footer class="px-6 pt-7 pb-12 text-center text-[13px] text-ink-faint border-t border-line">
+    I AM — 이승섭
+  </footer>
 
 </body>
 </html>

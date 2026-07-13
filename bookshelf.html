@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>책장 — 이승섭</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#F3EDE2', card: '#ECE3D2',
+          ink: '#37291D', 'ink-soft': '#6C5945', 'ink-faint': '#9C8C74',
+          line: 'rgba(55,41,29,0.10)',
+          book: '#4A6B4F', music: '#B08328', body: '#B65A38', shelf: '#8A6B4A',
+        },
+        fontFamily: {
+          serif: ['"Gowun Batang"', 'serif'],
+          sans: ['Pretendard', '-apple-system', 'sans-serif'],
+        },
+        keyframes: {
+          shelve: {
+            '0%':   { transform: 'translateY(-46px) rotate(-7deg)', opacity: '0' },
+            '55%':  { transform: 'translateY(6px) rotate(1.5deg)',  opacity: '1' },
+            '100%': { transform: 'translateY(0) rotate(0deg)',      opacity: '1' },
+          },
+        },
+        animation: { shelve: 'shelve .6s cubic-bezier(.2,.85,.3,1) both' },
+      },
+    },
+  };
+</script>
+</head>
+
+<body class="bg-bg text-ink font-sans antialiased leading-relaxed">
+
+  <!-- ===== 네비게이션 바 (모든 페이지 공통) ===== -->
+  <nav class="sticky top-0 z-40 bg-bg/85 backdrop-blur border-b border-line">
+    <div class="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="font-serif font-bold text-lg tracking-tight">이승섭</a>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="index.html" class="relative py-1 text-ink-soft hover:text-ink transition-colors">홈</a>
+        <a href="about.html" class="relative py-1 text-ink-soft hover:text-ink transition-colors">소개</a>
+        <a href="bookshelf.html" aria-current="page" class="relative py-1 text-ink">
+          책장
+          <span class="absolute left-0 -bottom-0.5 h-[2px] w-full bg-book"></span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== 헤더 ===== -->
+  <header class="px-6 pt-20 pb-6 max-w-3xl mx-auto text-center">
+    <span class="inline-block w-[9px] h-[9px] rounded-full bg-book mb-5" aria-hidden="true"></span>
+    <h1 class="font-serif font-bold text-[clamp(30px,5vw,42px)] leading-tight mb-4">책장</h1>
+    <p class="text-ink-soft text-[15.5px] max-w-[460px] mx-auto">
+      제가 아끼는 책들이 꽂혀 있어요. 좋은 책이 있다면 추천을 남겨주세요 —
+      바로 이 책장에 함께 꽂아둘게요.
+    </p>
+  </header>
+
+  <!-- ===== 책장 ===== -->
+  <section class="px-6 max-w-3xl mx-auto">
+    <div class="rounded-lg bg-card/60 border border-line pt-8 pb-0 px-2">
+      <div id="shelf" class="flex items-end gap-2.5 px-3 min-h-[230px] overflow-x-auto pb-0"
+           aria-label="책이 꽂힌 책장"></div>
+      <div class="mx-1 h-3.5 rounded-sm bg-gradient-to-b from-shelf to-[#6b4f36] shadow-[0_6px_12px_rgba(55,41,29,0.22)]"></div>
+    </div>
+    <p class="text-center text-[13px] text-ink-faint mt-4">
+      책장에 꽂힌 책 · <span id="count" class="text-ink-soft font-medium">0</span>권
+    </p>
+  </section>
+
+  <!-- ===== 선택한 책 상세 ===== -->
+  <section class="px-6 max-w-3xl mx-auto mt-6">
+    <div id="detail" class="rounded-lg bg-card border-l-[3px] border-book border border-line px-5 py-4 min-h-[92px] flex items-center">
+      <p id="detailEmpty" class="text-ink-faint text-sm">책을 눌러보면 추천평과 추천해주신 분을 볼 수 있어요.</p>
+      <div id="detailBody" class="hidden w-full">
+        <p class="font-serif font-bold text-[17px] text-ink" id="dTitle"></p>
+        <p class="text-[13px] text-ink-faint mt-0.5" id="dAuthor"></p>
+        <p class="text-[14px] text-ink-soft mt-2" id="dNote"></p>
+        <p class="text-[12px] text-ink-faint mt-2" id="dBy"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 추천 남기기 ===== -->
+  <section class="px-6 max-w-3xl mx-auto mt-10 mb-24">
+    <h2 class="font-serif font-bold text-[20px] mb-1">책 추천 남기기</h2>
+    <p class="text-ink-faint text-[13.5px] mb-5">남겨주신 책은 곧바로 위 책장에 꽂힙니다.</p>
+
+    <form id="recForm" class="grid gap-3">
+      <div class="grid sm:grid-cols-2 gap-3">
+        <div>
+          <label for="bTitle" class="block text-[13px] text-ink-soft mb-1">책 제목 <span class="text-body">*</span></label>
+          <input id="bTitle" type="text" maxlength="40" placeholder="예: 데미안"
+                 class="w-full px-3 py-2.5 rounded-md bg-bg border border-line text-[15px] focus:outline-none focus:border-book focus:ring-1 focus:ring-book transition">
+        </div>
+        <div>
+          <label for="bAuthor" class="block text-[13px] text-ink-soft mb-1">저자</label>
+          <input id="bAuthor" type="text" maxlength="30" placeholder="예: 헤르만 헤세"
+                 class="w-full px-3 py-2.5 rounded-md bg-bg border border-line text-[15px] focus:outline-none focus:border-book focus:ring-1 focus:ring-book transition">
+        </div>
+      </div>
+      <div>
+        <label for="bNote" class="block text-[13px] text-ink-soft mb-1">한 줄 추천평</label>
+        <input id="bNote" type="text" maxlength="60" placeholder="이 책을 왜 추천하시나요?"
+               class="w-full px-3 py-2.5 rounded-md bg-bg border border-line text-[15px] focus:outline-none focus:border-book focus:ring-1 focus:ring-book transition">
+      </div>
+      <div>
+        <label for="bRecommender" class="block text-[13px] text-ink-soft mb-1">추천인</label>
+        <input id="bRecommender" type="text" maxlength="20" placeholder="비워두면 '익명'으로 남겨져요"
+               class="w-full sm:w-1/2 px-3 py-2.5 rounded-md bg-bg border border-line text-[15px] focus:outline-none focus:border-book focus:ring-1 focus:ring-book transition">
+      </div>
+
+      <p id="bError" class="hidden text-[13px] text-body"></p>
+
+      <div>
+        <button type="submit"
+                class="mt-1 px-6 py-2.5 rounded-full bg-book text-bg text-sm font-medium hover:bg-book/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-book focus-visible:ring-offset-2 focus-visible:ring-offset-bg transition">
+          책장에 꽂기
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <footer class="px-6 pt-7 pb-12 text-center text-[13px] text-ink-faint border-t border-line">
+    I AM — 이승섭
+  </footer>
+
+  <!-- ===== 토스트 알림 ===== -->
+  <div id="toast"
+       class="fixed left-1/2 -translate-x-1/2 bottom-6 z-50 max-w-[92vw] px-5 py-3 rounded-full bg-ink text-bg text-sm shadow-lg opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+  </div>
+
+  <script>
+    // ---- 설정 ----
+    const STORAGE_KEY = 'iam-bookshelf-recs';
+    const PALETTE = ['#4A6B4F', '#B08328', '#B65A38', '#6C5945', '#4A6B6B', '#A85D5D', '#6B6B3A', '#8A5A3C'];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 이승섭이 미리 꽂아둔 책 (항상 표시)
+    const SEED_BOOKS = [
+      { title: '이방인', author: '알베르 카뮈', note: '부조리한 세상을 담담하게 바라보는 시선.', recommender: '이승섭', color: '#4A6B4F' },
+      { title: '도시와 그 불확실한 벽', author: '무라카미 하루키', note: '현실과 상상의 경계를 걷는 이야기.', recommender: '이승섭', color: '#B08328' },
+    ];
+
+    // ---- 요소 ----
+    const shelfEl = document.getElementById('shelf');
+    const countEl = document.getElementById('count');
+    const formEl  = document.getElementById('recForm');
+    const errEl   = document.getElementById('bError');
+    const toastEl = document.getElementById('toast');
+    const detailEmpty = document.getElementById('detailEmpty');
+    const detailBody  = document.getElementById('detailBody');
+
+    let selectedSpine = null;
+
+    // ---- 저장소 ----
+    function loadRecs() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch { return []; }
+    }
+    function saveRecs(list) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
+    // ---- 책 한 권(spine) 만들기 ----
+    function createSpine(book, animate) {
+      const len = [...book.title].length;
+      const height = Math.max(150, Math.min(215, len * 17 + 70));
+      const width  = [40, 44, 48][len % 3];
+
+      const spine = document.createElement('button');
+      spine.type = 'button';
+      spine.style.height = height + 'px';
+      spine.style.width  = width + 'px';
+      spine.style.background = book.color;
+      spine.className =
+        'spine relative shrink-0 rounded-[3px] shadow-md flex flex-col items-center justify-between ' +
+        'pt-4 pb-3 overflow-hidden cursor-pointer transition-transform duration-200 ' +
+        'hover:-translate-y-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink';
+      if (animate && !reduceMotion) spine.classList.add('animate-shelve');
+
+      // 제목 (세로쓰기)
+      const t = document.createElement('span');
+      t.textContent = book.title;
+      t.className = '[writing-mode:vertical-rl] font-serif text-bg text-[14px] tracking-wide leading-none max-h-full overflow-hidden';
+
+      // 저자 (세로쓰기, 작게)
+      const a = document.createElement('span');
+      a.textContent = book.author || '';
+      a.className = '[writing-mode:vertical-rl] text-bg/70 text-[10px] leading-none';
+
+      // 상단 장식 띠
+      const band = document.createElement('span');
+      band.className = 'absolute top-2 left-1/2 -translate-x-1/2 w-3.5 h-[2px] bg-bg/40 rounded-full';
+
+      spine.append(band, t, a);
+      spine.addEventListener('click', () => selectBook(book, spine));
+      return spine;
+    }
+
+    // ---- 상세 패널 ----
+    function selectBook(book, spine) {
+      if (selectedSpine) selectedSpine.classList.remove('ring-2', 'ring-ink', '-translate-y-1.5');
+      selectedSpine = spine;
+      spine.classList.add('ring-2', 'ring-ink', '-translate-y-1.5');
+
+      detailEmpty.classList.add('hidden');
+      detailBody.classList.remove('hidden');
+      document.getElementById('dTitle').textContent = book.title;
+      document.getElementById('dAuthor').textContent = book.author ? book.author : '저자 미상';
+      document.getElementById('dNote').textContent = book.note ? '"' + book.note + '"' : '추천평이 남겨지지 않았어요.';
+      document.getElementById('dBy').textContent = book.recommender + '님의 추천';
+    }
+
+    // ---- 토스트 ----
+    let toastTimer = null;
+    function toast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.remove('opacity-0', 'translate-y-2');
+      toastEl.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastEl.classList.add('opacity-0', 'translate-y-2');
+        toastEl.classList.remove('opacity-100', 'translate-y-0');
+      }, 2600);
+    }
+
+    // ---- 개수 갱신 ----
+    function updateCount() {
+      countEl.textContent = shelfEl.children.length;
+    }
+
+    // ---- 최초 렌더 ----
+    function render() {
+      shelfEl.innerHTML = '';
+      SEED_BOOKS.forEach(b => shelfEl.appendChild(createSpine(b, false)));
+      loadRecs().forEach(b => shelfEl.appendChild(createSpine(b, false)));
+      updateCount();
+    }
+
+    // ---- 추천 제출 ----
+    formEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('bTitle').value.trim();
+      const author = document.getElementById('bAuthor').value.trim();
+      const note = document.getElementById('bNote').value.trim();
+      let recommender = document.getElementById('bRecommender').value.trim();
+
+      if (!title) {
+        errEl.textContent = '책 제목을 입력해주세요.';
+        errEl.classList.remove('hidden');
+        document.getElementById('bTitle').focus();
+        return;
+      }
+      errEl.classList.add('hidden');
+      if (!recommender) recommender = '익명';
+
+      const book = {
+        title, author, note, recommender,
+        color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
+      };
+
+      // 저장
+      const recs = loadRecs();
+      recs.push(book);
+      saveRecs(recs);
+
+      // 책장에 꽂기 (애니메이션)
+      const spine = createSpine(book, true);
+      shelfEl.appendChild(spine);
+      spine.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', inline: 'end', block: 'nearest' });
+      updateCount();
+
+      // 확인 알림 + 방금 꽂은 책 선택
+      toast('『' + title + '』, ' + recommender + '님의 추천으로 책장에 꽂혔어요.');
+      selectBook(book, spine);
+
+      formEl.reset();
+      document.getElementById('bTitle').focus();
+    });
+
+    render();
+  </script>
+
+</body>
+</html>

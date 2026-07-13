@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>소개 — 이승섭</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#F3EDE2', card: '#ECE3D2',
+          ink: '#37291D', 'ink-soft': '#6C5945', 'ink-faint': '#9C8C74',
+          line: 'rgba(55,41,29,0.10)',
+          book: '#4A6B4F', music: '#B08328', body: '#B65A38', shelf: '#8A6B4A',
+        },
+        fontFamily: {
+          serif: ['"Gowun Batang"', 'serif'],
+          sans: ['Pretendard', '-apple-system', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+</head>
+
+<body class="bg-bg text-ink font-sans antialiased leading-relaxed">
+
+  <!-- ===== 네비게이션 바 (모든 페이지 공통) ===== -->
+  <nav class="sticky top-0 z-40 bg-bg/85 backdrop-blur border-b border-line">
+    <div class="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="index.html" class="font-serif font-bold text-lg tracking-tight">이승섭</a>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="index.html" class="relative py-1 text-ink-soft hover:text-ink transition-colors">홈</a>
+        <a href="about.html" aria-current="page" class="relative py-1 text-ink">
+          소개
+          <span class="absolute left-0 -bottom-0.5 h-[2px] w-full bg-gradient-to-r from-book via-music to-body"></span>
+        </a>
+        <a href="bookshelf.html" class="relative py-1 text-ink-soft hover:text-ink transition-colors">책장</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== 헤더 ===== -->
+  <header class="px-6 pt-20 pb-4 max-w-3xl mx-auto text-center">
+    <p class="text-[13px] tracking-[0.3em] text-ink-faint uppercase mb-5">About</p>
+    <h1 class="font-serif font-bold text-[clamp(30px,5vw,42px)] leading-tight mb-4">저를 이루는 세 갈래</h1>
+    <p class="text-ink-soft text-[15.5px] max-w-[440px] mx-auto">독서, 음악, 운동 — 각기 다른 결이지만 하나의 저를 만듭니다.</p>
+  </header>
+
+  <!-- ===== 스토리 ===== -->
+  <main class="px-6 max-w-3xl mx-auto pt-6 pb-8">
+
+    <!-- 독서 -->
+    <div class="grid grid-cols-[110px_1fr] gap-6 py-11 border-t border-line max-[560px]:grid-cols-1 max-[560px]:gap-2">
+      <div class="pt-1">
+        <span class="inline-block w-[9px] h-[9px] rounded-full mr-2 align-baseline bg-book" aria-hidden="true"></span>
+        <span class="font-serif text-[15px] text-ink-soft">독서</span>
+      </div>
+      <div>
+        <h2 class="font-serif font-bold text-[23px] mb-3">책을 곁에 두는 삶</h2>
+        <p class="text-ink-soft text-[15.5px]">책을 열심히 읽자는 의무감으로 살아가고 있습니다.</p>
+        <p class="text-ink-soft text-[15.5px] mt-2">좋은 도서가 있으면 꼭 추천해주세요.</p>
+        <a href="bookshelf.html"
+           class="inline-block mt-5 px-[18px] py-[9px] text-sm text-book border border-book rounded-full hover:bg-book hover:text-bg transition-colors">
+          제가 아끼는 책들 보러 가기 &#8594;
+        </a>
+      </div>
+    </div>
+
+    <!-- 음악 -->
+    <div class="grid grid-cols-[110px_1fr] gap-6 py-11 border-t border-line max-[560px]:grid-cols-1 max-[560px]:gap-2">
+      <div class="pt-1">
+        <span class="inline-block w-[9px] h-[9px] rounded-full mr-2 align-baseline bg-music" aria-hidden="true"></span>
+        <span class="font-serif text-[15px] text-ink-soft">음악</span>
+      </div>
+      <div>
+        <h2 class="font-serif font-bold text-[23px] mb-3">같은 곡, 다른 울림</h2>
+        <p class="text-ink-soft text-[15.5px]">고등학생 시절 피아노 콩쿠르에서 입상한 적이 있습니다.</p>
+        <p class="text-ink-soft text-[15.5px] mt-2">같은 곡도 연주자에 따라 다르게 들리는 그 느낌을 좋아합니다.</p>
+      </div>
+    </div>
+
+    <!-- 운동 -->
+    <div class="grid grid-cols-[110px_1fr] gap-6 py-11 border-t border-line max-[560px]:grid-cols-1 max-[560px]:gap-2">
+      <div class="pt-1">
+        <span class="inline-block w-[9px] h-[9px] rounded-full mr-2 align-baseline bg-body" aria-hidden="true"></span>
+        <span class="font-serif text-[15px] text-ink-soft">운동</span>
+      </div>
+      <div>
+        <h2 class="font-serif font-bold text-[23px] mb-3">운동 좋아함.</h2>
+        <p class="text-ink-soft text-[15.5px]">달리기 자주 합니다! 근린공원에 자주 출몰할 예정.</p>
+        <p class="text-ink-soft text-[15.5px] mt-2">축구, 헬스 등등 고루 다 좋아합니다.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="px-6 pt-7 pb-12 text-center text-[13px] text-ink-faint border-t border-line">
+    I AM — 이승섭
+  </footer>
+
+</body>
+</html>
